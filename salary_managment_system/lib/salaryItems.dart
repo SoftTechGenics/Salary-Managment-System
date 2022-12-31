@@ -11,12 +11,14 @@ class SalaryItems extends StatefulWidget {
 
 class _SalaryItemsState extends State<SalaryItems> {
   var contid = TextEditingController();
-  var result = '';
+  var contbps = TextEditingController();
+  var contdep = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Salary Items"),
+        title: const Text("Salary Items"),
         centerTitle: true,
       ),
       body: Container(
@@ -34,7 +36,7 @@ class _SalaryItemsState extends State<SalaryItems> {
               children: [
                 Container(
                   margin: const EdgeInsets.all(6),
-                  child: Center(
+                  child: const Center(
                       child: Text(
                     'ID',
                     style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
@@ -71,8 +73,9 @@ class _SalaryItemsState extends State<SalaryItems> {
                   width: 200,
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(17)),
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: contbps,
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(), hintText: "Enter BPS"),
                   ),
                 ),
@@ -99,7 +102,8 @@ class _SalaryItemsState extends State<SalaryItems> {
                   width: 200,
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(17)),
-                  child: const TextField(
+                  child: TextField(
+                    controller: contdep,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: "Enter Your Department"),
@@ -190,10 +194,11 @@ class _SalaryItemsState extends State<SalaryItems> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Templets(),
+                          builder: (context) => Templets(
+                              id: contid.text.toString(),
+                              bps: contbps.text.toString(),
+                              dep: contdep.text.toString()),
                         ));
-                    var id = contid.text.toString();
-                    result = id;
                   },
                   style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(
